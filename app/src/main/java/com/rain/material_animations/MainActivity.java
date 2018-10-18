@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView mIvSharedElements;
+    private ImageView mIvSharedElementsGreen;
     private TextView mTvSharedElements;
 
     @Override
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.ll_viewanimations).setOnClickListener(this);
 
         mIvSharedElements = findViewById(R.id.iv_shared_elements);
+        mIvSharedElementsGreen = findViewById(R.id.iv_shared_elements_green);
         mTvSharedElements = findViewById(R.id.tv_shared_elements);
     }
 
@@ -72,7 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ll_viewanimations:
-
+                Pair<View, String>[] pairs2 = TransitionHelper.createSafeTransitionParticipants(this, true,
+                        new Pair<>(mIvSharedElementsGreen, getString(R.string.square_green_name)));
+                startActivity(AnimationsActivity.class, pairs2);
                 break;
 
             default:

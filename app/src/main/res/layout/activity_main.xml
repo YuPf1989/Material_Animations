@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/ll_transitions"
-        style="@style/main_linearlayout_style">
+        style="@style/AppTheme.MainLinearlayoutStyle">
 
         <ImageView
             android:layout_width="45dp"
@@ -26,7 +26,7 @@
 
     <LinearLayout
         android:id="@+id/ll_sharedelements"
-        style="@style/main_linearlayout_style">
+        style="@style/AppTheme.MainLinearlayoutStyle">
 
         <ImageView
             android:id="@+id/iv_shared_elements"
@@ -49,12 +49,15 @@
 
     <LinearLayout
         android:id="@+id/ll_viewanimations"
-        style="@style/main_linearlayout_style">
+        style="@style/AppTheme.MainLinearlayoutStyle">
 
         <ImageView
+            android:id="@+id/iv_shared_elements_green"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/circle_green" />
+            android:background="@drawable/circle_green"
+            android:transitionName="@string/square_green_name"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,7 +69,7 @@
 
     <LinearLayout
         android:id="@+id/ll_circular"
-        style="@style/main_linearlayout_style">
+        style="@style/AppTheme.MainLinearlayoutStyle">
 
         <ImageView
             android:layout_width="45dp"

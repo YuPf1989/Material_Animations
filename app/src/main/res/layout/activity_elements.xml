@@ -13,8 +13,6 @@
         android:text="Toolbar title is a shared element between MainActivity and this activity"
         android:textSize="20sp" />
 
-
-
     <FrameLayout
         android:id="@+id/add_fragment"
         android:layout_width="match_parent"
