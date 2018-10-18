@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Material_Animations</string>
+    <string name="square_blue_name">square_blue</string>
+    <string name="sample_blue_title">sample_blue_title</string>
 </resources>

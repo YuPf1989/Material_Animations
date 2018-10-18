@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/circle_blue" />
+            android:background="@drawable/circle_red" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,16 +29,22 @@
         style="@style/main_linearlayout_style">
 
         <ImageView
+            android:id="@+id/iv_shared_elements"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/circle_blue" />
+            android:background="@drawable/circle_blue"
+            android:transitionName="@string/square_blue_name"
+            />
 
         <TextView
+            android:id="@+id/tv_shared_elements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="Shared Elements"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:transitionName="@string/sample_blue_title"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -48,7 +54,7 @@
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/circle_blue" />
+            android:background="@drawable/circle_green" />
 
         <TextView
             android:layout_width="wrap_content"
