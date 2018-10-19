@@ -3,4 +3,6 @@
     <string name="square_blue_name">square_blue</string>
     <string name="sample_blue_title">sample_blue_title</string>
     <string name="square_green_name">square_green</string>
+
+    <integer name="anim_duration_long">500</integer>
 </resources>
