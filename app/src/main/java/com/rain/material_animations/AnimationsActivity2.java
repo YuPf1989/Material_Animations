@@ -21,6 +21,7 @@ import java.util.ArrayList;
  * Description:
  */
 public class AnimationsActivity2 extends BaseActivity {
+    private static final String TAG  = "AnimationsActivity2";
 
     private Toolbar mToolbar;
     private Scene scene0;
@@ -77,9 +78,9 @@ public class AnimationsActivity2 extends BaseActivity {
     }
 
     private void setLayout() {
-        final ViewGroup viewRoot = findViewById(R.id.scene_root);
+        final ViewGroup sceneRoot = findViewById(R.id.scene_root);
         // 获取布局中的文字场景
-        scene0 = Scene.getSceneForLayout(viewRoot, R.layout.layout_animations2_scene0, this);
+        scene0 = Scene.getSceneForLayout(sceneRoot, R.layout.layout_animations2_scene0, this);
         scene0.setEnterAction(new Runnable() {
             @Override
             public void run() {
@@ -88,8 +89,7 @@ public class AnimationsActivity2 extends BaseActivity {
                     view.animate()
                             .setStartDelay(i * 100)
                             .scaleX(1)
-                            .scaleY(1)
-                            .start();
+                            .scaleY(1);
                 }
             }
         });
@@ -97,8 +97,10 @@ public class AnimationsActivity2 extends BaseActivity {
         scene0.setExitAction(new Runnable() {
             @Override
             public void run() {
-                TransitionManager.beginDelayedTransition(viewRoot);
-                TextView textView = viewRoot.findViewById(R.id.tv_title);
+                // sceneRoot 参数实际应该为包裹4个button的布局，这里的
+                // 参数是不对的，介于布局不好修改就用sceneRoot代替了
+                TransitionManager.beginDelayedTransition(sceneRoot);
+                TextView textView = sceneRoot.findViewById(R.id.tv_title);
                 textView.setScaleX(0);
                 textView.setScaleY(0);
             }
@@ -114,10 +116,10 @@ public class AnimationsActivity2 extends BaseActivity {
         animationViews.add(btn3);
         animationViews.add(btn4);
 
-        scene1 = Scene.getSceneForLayout(viewRoot, R.layout.activity_animations_scene1, this);
-        scene2 = Scene.getSceneForLayout(viewRoot, R.layout.activity_animations_scene2, this);
-        scene3 = Scene.getSceneForLayout(viewRoot, R.layout.activity_animations_scene3, this);
-        scene4 = Scene.getSceneForLayout(viewRoot, R.layout.activity_animations_scene4, this);
+        scene1 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_animations_scene1, this);
+        scene2 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_animations_scene2, this);
+        scene3 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_animations_scene3, this);
+        scene4 = Scene.getSceneForLayout(sceneRoot, R.layout.activity_animations_scene4, this);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

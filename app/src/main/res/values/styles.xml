@@ -1,4 +1,4 @@
-<resources>
+<resources >
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -33,5 +33,9 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="AppTheme.Scaled" parent="Base.Widget.AppCompat.Button">
+        <item name="android:scaleX">0</item>
+        <item name="android:scaleY">0</item>
+    </style>
 
 </resources>
