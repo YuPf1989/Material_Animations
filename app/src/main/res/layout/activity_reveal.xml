@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Reveal"
+        android:elevation="4dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_reveal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/circle_yellow"
+                android:transitionName="@string/transition_reveal1" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@android:style/TextAppearance.Material.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                tools:text="title" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/reveal_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/sample_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Sample Activity demonstrating how to create different CirculaReveal animations"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/square_green"
+            style="@style/AppTheme.Medium.Scaled"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/circle_green" />
+
+        <ImageView
+            android:id="@+id/square_red"
+            style="@style/AppTheme.Medium.Scaled"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/square_green"
+            android:src="@drawable/circle_red" />
+
+        <ImageView
+            android:id="@+id/square_blue"
+            style="@style/AppTheme.Medium.Scaled"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/square_red"
+            android:src="@drawable/circle_blue" />
+
+        <ImageView
+            android:id="@+id/square_yellow"
+            style="@style/AppTheme.Medium.Scaled"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/square_blue"
+            android:src="@drawable/circle_yellow" />
+
+    </RelativeLayout>
+
+</LinearLayout>

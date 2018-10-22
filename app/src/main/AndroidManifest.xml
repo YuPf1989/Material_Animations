@@ -29,6 +29,9 @@
         <activity
             android:name=".AnimationsActivity2"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RevealActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

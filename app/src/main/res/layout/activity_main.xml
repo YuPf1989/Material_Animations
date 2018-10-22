@@ -33,8 +33,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/circle_blue"
-            android:transitionName="@string/square_blue_name"
-            />
+            android:transitionName="@string/square_blue_name" />
 
         <TextView
             android:id="@+id/tv_shared_elements"
@@ -43,8 +42,7 @@
             android:layout_marginLeft="16dp"
             android:text="Shared Elements"
             android:textSize="20sp"
-            android:transitionName="@string/sample_blue_title"
-            />
+            android:transitionName="@string/sample_blue_title" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,8 +54,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/circle_green"
-            android:transitionName="@string/square_green_name"
-            />
+            android:transitionName="@string/square_green_name" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,9 +69,11 @@
         style="@style/AppTheme.MainLinearlayoutStyle">
 
         <ImageView
+            android:id="@+id/iv_shared_elements_yellow"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/circle_yellow" />
+            android:background="@drawable/circle_yellow"
+            android:transitionName="@string/transition_reveal1" />
 
         <TextView
             android:layout_width="wrap_content"

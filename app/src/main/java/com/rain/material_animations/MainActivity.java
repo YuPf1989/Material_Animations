@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView mIvSharedElements;
     private ImageView mIvSharedElementsGreen;
+    private ImageView mIvSharedElementsYellow;
     private TextView mTvSharedElements;
 
     @Override
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mIvSharedElements = findViewById(R.id.iv_shared_elements);
         mIvSharedElementsGreen = findViewById(R.id.iv_shared_elements_green);
+        mIvSharedElementsYellow = findViewById(R.id.iv_shared_elements_yellow);
         mTvSharedElements = findViewById(R.id.tv_shared_elements);
     }
 
@@ -55,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_circular:
-
+                Pair<View, String>[] pairs3 = TransitionHelper.createSafeTransitionParticipants(this, true,
+                        new Pair<>(mIvSharedElementsYellow, getString(R.string.transition_reveal1)));
+                startActivity(RevealActivity.class, pairs3);
                 break;
 
             case R.id.ll_transitions:
