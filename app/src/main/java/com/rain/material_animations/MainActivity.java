@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         setWindowAnimations();
 
-
     }
 
     // 设置window过场动画

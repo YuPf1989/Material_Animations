@@ -104,6 +104,7 @@ public class RevealActivity extends BaseActivity implements View.OnTouchListener
             @Override
             public void onTransitionEnd(Transition transition) {
                 transition.removeListener(this);
+                // 这行代码没什么用，并没有预期的效果
                 hideTarget();
                 animateRevealShow(mToolbar);
                 animateButtonsIn();
@@ -165,21 +166,12 @@ public class RevealActivity extends BaseActivity implements View.OnTouchListener
         findViewById(R.id.square_green).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clicks = !clicks;
-                if (clicks) {
-                    ivReveal.setVisibility(View.GONE);
-                } else {
-                    ivReveal.setVisibility(View.VISIBLE);
-
-                }
                 revealGreen();
             }
         });
 
         findViewById(R.id.square_yellow).setOnTouchListener(this);
     }
-
-    private boolean clicks;
 
     // 黄色幕布效果
     private void revealYellow(float cx, float cy) {
