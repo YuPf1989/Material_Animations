@@ -13,7 +13,6 @@
         android:layout_height="?android:actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Reveal"
         android:elevation="4dp"
         >
 
@@ -27,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/circle_yellow"
-                android:transitionName="@string/transition_reveal1" />
+                android:transitionName="@string/transition_reveal1"
+                />
 
             <TextView
                 android:id="@+id/title"

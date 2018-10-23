@@ -9,12 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -22,12 +27,14 @@ import android.widget.TextView;
  * Date:2018/10/22 10:11
  * Description:
  */
-public class RevealActivity extends BaseActivity {
-
+public class RevealActivity extends BaseActivity implements View.OnTouchListener {
+    private static final String TAG = "RevealActivity";
     private Toolbar mToolbar;
     private Interpolator interpolator;
     private ViewGroup buttonRoot;
     private TextView body;
+    private ImageView btnRed;
+    private ImageView ivReveal;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,9 +42,8 @@ public class RevealActivity extends BaseActivity {
         setContentView(R.layout.activity_reveal);
         initView();
         // 这里设置的title被布局遮挡住了
-        initToolBar(mToolbar,true,"Reveal");
+        initToolBar(mToolbar, true, "Reveal");
         setWindowAnimations();
-
     }
 
     private void setWindowAnimations() {
@@ -52,7 +58,7 @@ public class RevealActivity extends BaseActivity {
         getWindow().setReturnTransition(fade);
         fade.setDuration(300);
         fade.setStartDelay(300);
-        fade.addListener(new SimpleTransitionListener(){
+        fade.addListener(new SimpleTransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
                 transition.removeListener(this);
@@ -102,7 +108,6 @@ public class RevealActivity extends BaseActivity {
                 animateRevealShow(mToolbar);
                 animateButtonsIn();
             }
-
         });
     }
 
@@ -141,42 +146,116 @@ public class RevealActivity extends BaseActivity {
         mToolbar = findViewById(R.id.toolbar);
         buttonRoot = findViewById(R.id.reveal_root);
         body = findViewById(R.id.sample_body);
+        ivReveal = findViewById(R.id.iv_reveal);
         findViewById(R.id.square_blue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                revealBlue();
             }
         });
 
-        findViewById(R.id.square_red).setOnClickListener(new View.OnClickListener() {
+        btnRed = findViewById(R.id.square_red);
+        btnRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                revealRed();
             }
         });
 
         findViewById(R.id.square_green).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                clicks = !clicks;
+                if (clicks) {
+                    ivReveal.setVisibility(View.GONE);
+                } else {
+                    ivReveal.setVisibility(View.VISIBLE);
+
+                }
                 revealGreen();
             }
         });
 
-        findViewById(R.id.square_yellow).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        findViewById(R.id.square_yellow).setOnTouchListener(this);
     }
 
+    private boolean clicks;
+
+    // 黄色幕布效果
+    private void revealYellow(float cx, float cy) {
+        animateRevealColorCoordinates(buttonRoot, R.color.sample_yellow, (int) cx, (int) cy);
+        body.setText(R.string.reveal_body1);
+        body.setTextColor(ContextCompat.getColor(RevealActivity.this, R.color.theme_yellow_background));
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            if (view.getId() == R.id.square_yellow) {
+                revealYellow(motionEvent.getRawX(), motionEvent.getRawY());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 蓝色幕布效果
+    private void revealBlue() {
+        animateButtonsOut();
+        Animator anim = animateRevealColorCoordinates(buttonRoot, R.color.sample_blue, buttonRoot.getWidth() / 2, 0);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                animateButtonsIn();
+            }
+        });
+        body.setText(R.string.reveal_body4);
+        body.setTextColor(ContextCompat.getColor(RevealActivity.this, R.color.theme_blue_background));
+    }
+
+    // 红色按钮的幕布效果
+    private void revealRed() {
+        final RelativeLayout.LayoutParams originalParams = (RelativeLayout.LayoutParams) btnRed.getLayoutParams();
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion);
+        transition.addListener(new SimpleTransitionListener() {
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                transition.removeListener(this);
+                animateRevealColor(buttonRoot, R.color.sample_red);
+                body.setText(R.string.reveal_body3);
+                body.setTextColor(ContextCompat.getColor(RevealActivity.this, R.color.theme_red_background));
+                btnRed.setLayoutParams(originalParams);
+            }
+        });
+
+        TransitionManager.beginDelayedTransition(buttonRoot, transition);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        btnRed.setLayoutParams(layoutParams);
+    }
+
+    // 绿色按钮的幕布效果
     private void revealGreen() {
         animateRevealColor(buttonRoot, R.color.sample_green);
         body.setText(R.string.reveal_body2);
         body.setTextColor(ContextCompat.getColor(this, R.color.theme_green_background));
     }
 
-    private void animateRevealColor(ViewGroup viewGroup, int color) {
+    private void animateRevealColor(ViewGroup viewRoot, int color) {
+        int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
+        int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
+        animateRevealColorCoordinates(viewRoot, color, cx, cy);
+    }
 
+    private Animator animateRevealColorCoordinates(ViewGroup viewRoot, int color, int cx, int cy) {
+        viewRoot.setBackgroundColor(ContextCompat.getColor(this, color));
+        // Math.hypot 已知两边求斜边
+        double finalRadius = Math.hypot(viewRoot.getHeight(), viewRoot.getWidth());
+        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, cx, cy, 0, (float) finalRadius);
+        anim.setInterpolator(new AccelerateDecelerateInterpolator());
+        anim.setDuration(500);
+        anim.start();
+        return anim;
     }
 }
